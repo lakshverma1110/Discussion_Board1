@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-header {
+  background: #282c34;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-btn {
+  background: #ff5c5c;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.app-main {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 250px;
+  margin-right: 20px;
+}
+
+.content {
+  flex: 1;
+}
+
+.login-container {
+  max-width: 300px;
+  margin: 80px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+}
+
+.login-container input {
+  width: 90%;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background: #61dafb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.toggle-auth {
+  margin-top: 10px;
+  color: blue;
+  cursor: pointer;
+}
+
+.add-discussion input {
+  width: 70%;
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.add-discussion button {
+  padding: 8px;
+  background: #61dafb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.popup.success {
+  background: #4caf50;
+}
+
+.popup.error {
+  background: #f44336;
+}
+
+.popup.info {
+  background: #2196f3;
+}
