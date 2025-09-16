@@ -1,40 +1,56 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background: #f9fafb;
+  color: #333;
 }
 
+/* Header */
 .app-header {
-  background: #282c34;
+  background: linear-gradient(90deg, #282c34, #3a3f47);
   color: white;
   padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logout-btn {
   background: #ff5c5c;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   color: white;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
+.logout-btn:hover {
+  background: #e04a4a;
+  transform: scale(1.05);
+}
+
+/* Main Layout */
 .app-main {
   display: flex;
   padding: 20px;
 }
 
 .sidebar {
-  width: 250px;
+  width: 260px;
   margin-right: 20px;
 }
 
 .content {
   flex: 1;
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Login */
 .login-container {
   max-width: 300px;
   margin: 80px auto;
@@ -43,6 +59,7 @@ body {
   border-radius: 12px;
   background: #fff;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .login-container input {
@@ -51,6 +68,12 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.login-container input:focus {
+  border-color: #61dafb;
+  outline: none;
 }
 
 .login-container button {
@@ -61,28 +84,167 @@ body {
   border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.login-container button:hover {
+  background: #4cbfe0;
 }
 
 .toggle-auth {
   margin-top: 10px;
-  color: blue;
+  color: #0073e6;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
+.toggle-auth:hover {
+  color: #005bb5;
+}
+
+/* Add Discussion */
 .add-discussion input {
   width: 70%;
   padding: 8px;
   margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.add-discussion input:focus {
+  border-color: #61dafb;
+  outline: none;
 }
 
 .add-discussion button {
-  padding: 8px;
+  padding: 8px 12px;
   background: #61dafb;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
+.add-discussion button:hover {
+  background: #4cbfe0;
+  transform: scale(1.05);
+}
+
+/* Discussions */
+.discussion-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.discussion-list li {
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.discussion-list li:hover {
+  background: #eef6ff;
+  cursor: pointer;
+}
+
+.discussion-list li.selected {
+  background: #dbeafe;
+  border-color: #61dafb;
+}
+
+.discussion-actions {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: #ff5c5c;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #e04a4a;
+  transform: scale(1.05);
+}
+
+.vote-section {
+  display: flex;
+  gap: 12px;
+}
+
+.vote-section label {
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.vote-section input {
+  margin-right: 4px;
+}
+
+.vote-section label:hover {
+  color: #0073e6;
+}
+
+/* Posts */
+.post-list h3 {
+  margin-top: 0;
+}
+
+.post-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-list form {
+  margin-top: 10px;
+}
+
+.post-list input {
+  width: 70%;
+  padding: 8px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.post-list input:focus {
+  border-color: #61dafb;
+  outline: none;
+}
+
+.post-list button {
+  padding: 8px 12px;
+  background: #61dafb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.post-list button:hover {
+  background: #4cbfe0;
+  transform: scale(1.05);
+}
+
+/* Popup */
 .popup {
   position: fixed;
   top: 20px;
@@ -91,6 +253,8 @@ body {
   border-radius: 6px;
   color: #fff;
   font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
 }
 
 .popup.success {
