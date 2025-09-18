@@ -1,0 +1,125 @@
+/* --- Login Page Styling --- */
+.login-container {
+  max-width: 350px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-container input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #61dafb;
+  outline: none;
+}
+
+.login-container button {
+  width: 95%;
+  padding: 10px;
+  margin-top: 15px;
+  background: #61dafb;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-container button:hover {
+  background: #4cbfe0;
+  transform: scale(1.03);
+}
+
+.toggle-auth {
+  margin-top: 15px;
+  color: #0073e6;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.toggle-auth:hover {
+  color: #005bb5;
+}
+
+/* --- Discussion Board Buttons --- */
+button,
+.delete-btn,
+.vote-section label {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #ff7f50;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #ff5722;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.delete-btn {
+  background: #ff5c5c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background: #e04a4a;
+  transform: scale(1.05);
+}
+
+/* Like/Dislike Buttons */
+.vote-section input {
+  display: none;
+}
+
+.vote-section label {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #e1e8f0;
+  margin-right: 5px;
+  transition: all 0.2s ease;
+}
+
+.vote-section input:checked + label {
+  background: #61dafb;
+  color: #fff;
+}
+
+.vote-section label:hover {
+  background: #4cbfe0;
+  color: #fff;
+  transform: scale(1.05);
+}
