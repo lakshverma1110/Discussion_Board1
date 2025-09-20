@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
-import "./Login.css"; // Import the CSS
+import "./Login.css";
 
-function Login() {
-  const { login, signup } = useAuth();
+export default function Login() {
+  const { login, signup, popup } = useAuth();
   const [isSignup, setIsSignup] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,16 +13,17 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      signup(username.trim(), email.trim(), mobile.trim(), password);
+      signup(username, password, email, mobile);
     } else {
-      login(username.trim(), password);
+      login(username, password);
     }
   };
 
   return (
     <div className="login-container">
       <h2>{isSignup ? "Sign Up" : "Login"}</h2>
-      <form onSubmit={handleSubmit}>
+      {popup && <div className={`popup ${popup.type}`}>{popup.message}</div>}
+      <form onSubmit={handleSubmit} className="login-form">
         <input
           type="text"
           placeholder="Username"
@@ -40,7 +41,7 @@ function Login() {
               required
             />
             <input
-              type="text"
+              type="tel"
               placeholder="Mobile Number"
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
@@ -57,13 +58,12 @@ function Login() {
         />
         <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
       </form>
-      <p className="toggle-auth" onClick={() => setIsSignup(!isSignup)}>
-        {isSignup
-          ? "Already have an account? Login"
-          : "No account? Sign Up"}
+      <p>
+        {isSignup ? "Already have an account?" : "Don’t have an account?"}{" "}
+        <span className="toggle-link" onClick={() => setIsSignup(!isSignup)}>
+          {isSignup ? "Login" : "Sign Up"}
+        </span>
       </p>
     </div>
   );
 }
-
-export default Login;

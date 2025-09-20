@@ -1,4 +1,4 @@
-/* ====== General Styles ====== */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -10,7 +10,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-/* ====== Header ====== */
+
 .app-header {
   background: linear-gradient(90deg, #4f46e5, #6366f1);
   color: white;
@@ -39,19 +39,19 @@ h1, h2, h3 {
   transform: scale(1.05);
 }
 
-/* ====== Main Layout ====== */
+
 .app-main {
   display: flex;
   padding: 20px;
   gap: 20px;
 }
 
-/* Sidebar */
+
 .sidebar {
   width: 300px;
 }
 
-/* Content */
+
 .content {
   flex: 1;
   background: white;
@@ -60,7 +60,7 @@ h1, h2, h3 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* ====== Login ====== */
+
 .login-container {
   max-width: 350px;
   margin: 100px auto;
@@ -114,7 +114,7 @@ h1, h2, h3 {
   color: #6366f1;
 }
 
-/* ====== Add Discussion ====== */
+
 .add-discussion input {
   width: 70%;
   padding: 10px;
@@ -126,7 +126,7 @@ h1, h2, h3 {
 
 .add-discussion input:focus {
   border-color: #4f46e5;
-  outline: none;
+  outline: black;
 }
 
 .add-discussion button {
@@ -144,7 +144,7 @@ h1, h2, h3 {
   transform: scale(1.05);
 }
 
-/* ====== Discussion List ====== */
+
 .discussion-list {
   margin-top: 20px;
 }
@@ -218,23 +218,50 @@ h1, h2, h3 {
   margin-top: 0;
 }
 
+/* ====== Post List ====== */
+.post-list {
+  margin-top: 20px;
+}
+
+.post-list h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #333;
+}
+
 .post-list ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .post-list li {
-  padding: 10px;
-  border-bottom: 1px solid #e5e7eb;
-  border-radius: 8px;
-  margin-bottom: 8px;
   background: #fafafa;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
+.post-list li:hover {
+  background: #f0f4ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.post-author {
+  font-size: 13px;
+  color: #555;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* Add post form */
 .post-list form {
-  margin-top: 12px;
   display: flex;
   gap: 10px;
+  margin-top: 15px;
 }
 
 .post-list input {
@@ -264,6 +291,62 @@ h1, h2, h3 {
   background: #6366f1;
   transform: scale(1.05);
 }
+/* Post delete button */
+.post-list .delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right; /* ✅ Aligns delete button to the right */
+  transition: all 0.2s ease;
+}
+
+.post-list .delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Add Post form */
+.add-post-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.add-post-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-post-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.4);
+}
+
+.add-post-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.add-post-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
 
 /* ====== Popup ====== */
 .popup {
@@ -289,4 +372,23 @@ h1, h2, h3 {
 
 .popup.info {
   background: #2196f3;
+}
+ .discussion-item {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;  /* 👈 shows hand sign */
+}
+
+.discussion-item:hover {
+  background-color: #f0f4ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.discussion-item.selected {
+  border: 2px solid #4a44c3;
+  background-color: #eef2ff;
 }

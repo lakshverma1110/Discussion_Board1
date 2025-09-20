@@ -1,4 +1,4 @@
-/* --- Login Page Styling --- */
+
 .login-container {
   max-width: 350px;
   margin: 100px auto;
@@ -58,7 +58,20 @@
   color: #005bb5;
 }
 
-/* --- Discussion Board Buttons --- */
+.toggle-link {
+  color: #4f46e5;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.toggle-link:hover {
+  color: #6366f1;
+  text-decoration: underline;
+}
+
+
+
 button,
 .delete-btn,
 .vote-section label {
@@ -71,7 +84,7 @@ button,
   transition: all 0.2s ease;
 }
 
-/* Logout Button */
+
 .logout-btn {
   background: #ff7f50;
   color: #fff;
@@ -88,7 +101,7 @@ button,
   transform: scale(1.05);
 }
 
-/* Delete Button */
+
 .delete-btn {
   background: #ff5c5c;
   color: #fff;
@@ -99,7 +112,7 @@ button,
   transform: scale(1.05);
 }
 
-/* Like/Dislike Buttons */
+
 .vote-section input {
   display: none;
 }

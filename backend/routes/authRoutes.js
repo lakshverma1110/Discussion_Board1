@@ -1,46 +1,54 @@
 const express = require("express");
-const User = require("../models/User");
 const router = express.Router();
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+
+// Password validation function
+function isValidPassword(password) {
+  const regex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+  return regex.test(password);
+}
 
 // Signup
 router.post("/signup", async (req, res) => {
-  const { username, email, mobile, password } = req.body;
-
-  if (!username || !email || !mobile || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  const passRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
-  if (!passRegex.test(password)) {
-    return res.status(400).json({
-      message:
-        "Password must be at least 8 chars, include 1 uppercase & 1 special char"
-    });
-  }
-
   try {
-    const existingUser = await User.findOne({ username });
-    if (existingUser)
-      return res.status(400).json({ message: "Username already exists" });
+    const { username, email, mobile, password } = req.body;
 
-    const newUser = new User({ username, email, mobile, password });
-    await newUser.save();
-    res.status(201).json({ message: "User created successfully", user: newUser });
+    if (!isValidPassword(password)) {
+      return res
+        .status(400)
+        .json({ message: "Weak password! Must be 8+ chars, 1 uppercase, 1 special char." });
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ username, email, mobile, password: hashedPassword });
+    await user.save();
+
+    res.json({ user: { username, email, mobile } });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Signup failed" });
   }
 });
 
 // Login
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ username, password });
-    if (!user)
-      return res.status(400).json({ message: "Wrong username or password" });
-    res.json({ message: "Login successful", user });
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+    res.json({ user: { username: user.username, email: user.email, mobile: user.mobile } });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Login failed" });
   }
 });
 

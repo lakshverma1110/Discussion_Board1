@@ -3,9 +3,16 @@ import React, { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  const [accounts, setAccounts] = useState(() => {
+    const storedAccounts = localStorage.getItem("accounts");
+    return storedAccounts ? JSON.parse(storedAccounts) : [];
+  });
+
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
   const [popup, setPopup] = useState(null);
 
   const showPopup = (message, type = "info") => {
@@ -13,40 +20,46 @@ export function AuthProvider({ children }) {
     setTimeout(() => setPopup(null), 3000);
   };
 
-  const signup = async (username, email, mobile, password) => {
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, mobile, password })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser({ username });
-        localStorage.setItem("user", JSON.stringify({ username }));
-        showPopup(data.message, "success");
-      } else showPopup(data.message, "error");
-    } catch (err) {
-      showPopup("Server error ❌", "error");
+  // ✅ Login
+  const login = (username, password) => {
+    const existingUser = accounts.find(
+      (acc) => acc.username === username && acc.password === password
+    );
+    if (existingUser) {
+      const loggedInUser = { username: existingUser.username };
+      setUser(loggedInUser);
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+      showPopup("Login successful ✅", "success");
+    } else {
+      showPopup("Wrong username or password ❌", "error");
     }
   };
 
-  const login = async (username, password) => {
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser({ username });
-        localStorage.setItem("user", JSON.stringify({ username }));
-        showPopup(data.message, "success");
-      } else showPopup(data.message, "error");
-    } catch (err) {
-      showPopup("Server error ❌", "error");
+  // ✅ Signup with email, mobile & password validation
+  const signup = (username, password, email, mobile) => {
+    const existingUser = accounts.find((acc) => acc.username === username);
+    if (existingUser) {
+      showPopup("Username already exists ⚠️", "error");
+      return;
     }
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      showPopup(
+        "Password must be at least 8 characters, include one uppercase and one special character ⚠️",
+        "error"
+      );
+      return;
+    }
+
+    const newAccounts = [...accounts, { username, password, email, mobile }];
+    setAccounts(newAccounts);
+    localStorage.setItem("accounts", JSON.stringify(newAccounts));
+
+    const loggedInUser = { username };
+    setUser(loggedInUser);
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    showPopup("Account created successfully 🎉", "success");
   };
 
   const logout = () => {
@@ -56,7 +69,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signup, login, logout, popup }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, popup }}>
       {children}
     </AuthContext.Provider>
   );
